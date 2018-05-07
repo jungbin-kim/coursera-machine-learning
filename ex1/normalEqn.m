@@ -11,7 +11,8 @@ theta = zeros(size(X, 2), 1);
 %
 
 % ---------------------- Sample Solution ----------------------
-
+tx = transpose(X);
+theta = pinv(tx*X)*tx*y;
 
 
 
