@@ -35,13 +35,14 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
+theta_exclude_zero = theta;
+theta_exclude_zero(1) = 0;
 
+h = sigmoid(X * theta);
+lambdaDivM = lambda / m;
 
-
-
-
-
-
+J = (sum(y .* log(h) + (1 - y) .* (log(1 - h))) / -m) + (sum(theta_exclude_zero .^ 2) * (lambdaDivM / 2)); 
+grad = (transpose(X) * (h-y)) / m + lambdaDivM * theta_exclude_zero;
 
 
 
