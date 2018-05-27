@@ -30,9 +30,8 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
+% [x, index] = max ([1, 3, 5, 2, 5]) =>  x = 5, max value index = 3
+[maxV, p] = max(X * transpose(all_theta), [], 2);
 
 
 
