@@ -21,13 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
 
+secondLayerX = sigmoid(X * transpose(Theta1));
+m2 = size(secondLayerX, 1);
+% Add ones to the secondLayerX data matrix
+secondLayerX = [ones(m2, 1) secondLayerX];
 
-
-
-
-
-
+[maxV, p] = max(secondLayerX * transpose(Theta2), [], 2);
 
 % =========================================================================
 
