@@ -62,18 +62,20 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Part1 %
 
+% y의 값을 1~10까지의 output 형태로 바꿔줌.
+% yk를 vectorized로 해결하기 위함.
+vectorizedLabel = [eye(num_labels)(:)];
+convertedY = [];
+for n=transpose(y),
+	convertedY = [convertedY; reshape(vectorizedLabel((n-1)*num_labels+1:n*num_labels),1,num_labels)];
+end;
 
+h1 = sigmoid([ones(m,1) X] * transpose(Theta1));
+h2 = sigmoid([ones(size(h1,1), 1) h1] * transpose(Theta2));
 
-
-
-
-
-
-
-
-
-
+J = sum((convertedY .* log(h2) + (1 - convertedY) .* (log(1 - h2)))(:)) / -m;
 
 
 
