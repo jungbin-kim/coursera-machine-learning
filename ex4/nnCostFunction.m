@@ -77,8 +77,15 @@ h2 = sigmoid([ones(size(h1,1), 1) h1] * transpose(Theta2));
 
 J = sum((convertedY .* log(h2) + (1 - convertedY) .* (log(1 - h2)))(:)) / -m;
 
+% Regularized cost function
+theta1_exclude_zero = Theta1;
+theta1_exclude_zero(:,[1]) = []; 
+theta2_exclude_zero = Theta2;
+theta2_exclude_zero(:,[1]) = []; 
 
+regularized = (lambda / (2*m)) * (sum(theta1_exclude_zero(:) .^ 2) + sum(theta2_exclude_zero(:) .^ 2));
 
+J = J + regularized;
 
 
 
