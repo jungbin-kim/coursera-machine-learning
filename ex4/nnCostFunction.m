@@ -88,6 +88,37 @@ regularized = (lambda / (2*m)) * (sum(theta1_exclude_zero(:) .^ 2) + sum(theta2_
 J = J + regularized;
 
 
+% Part2 %
+for t=1:m,
+	% Step1
+	a_1 = [1; transpose(X(t,:))]; % ex. 401x1
+	z_2 = Theta1 * a_1; % ex. 25x401*401x1 = 25x1
+	a_2 = [1; sigmoid(z_2)]; % ex. 26x1
+	z_3 = Theta2 * a_2; % ex. 10x26*26x1 = 10x1
+	a_3 = sigmoid(z_3);
+
+
+	% Step2
+	y_t = transpose(convertedY(t,:));
+	delta_3_t = a_3  - y_t; % ex. 10x1
+
+	
+	% Step3,4 set layer2
+	% ex. 26x10*10x1 and then remove 1st row
+	delta_2_t = (transpose(Theta2) * delta_3_t)(2:end) .* sigmoidGradient(z_2); 
+	% 위의 식은 bias row 제거와 함께 한번에 계산한 것. 아래 식은 계산 후, bias row를 제거
+	% delta_2_t = (transpose(Theta2) * delta_3_t) .* [1; sigmoidGradient(z_2)];
+	% delta_2_t = delta_2_t(2:end); % Taking of the bias row
+
+	Theta1_grad = Theta1_grad + delta_2_t * transpose(a_1);
+	Theta2_grad = Theta2_grad + delta_3_t * transpose(a_2);
+
+end;
+
+% Step5
+Theta1_grad = (1/m) * Theta1_grad ;
+Theta2_grad = (1/m) * Theta2_grad ;
+
 
 % -------------------------------------------------------------
 
