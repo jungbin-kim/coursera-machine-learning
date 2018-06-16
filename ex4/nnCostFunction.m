@@ -116,8 +116,8 @@ for t=1:m,
 end;
 
 % Step5
-Theta1_grad = (1/m) * Theta1_grad ;
-Theta2_grad = (1/m) * Theta2_grad ;
+Theta1_grad = (1/m) * Theta1_grad + (lambda/m)*[zeros(size(theta1_exclude_zero,1),1) theta1_exclude_zero];
+Theta2_grad = (1/m) * Theta2_grad + (lambda/m)*[zeros(size(theta2_exclude_zero,1),1) theta2_exclude_zero];
 
 
 % -------------------------------------------------------------
