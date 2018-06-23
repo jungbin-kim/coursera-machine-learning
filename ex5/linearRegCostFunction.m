@@ -19,20 +19,20 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
-hVector = X * theta;
-J = (1/(2*m)) * sum((hVector - y) .^ 2);
+% Calculate J
+hypo_vector = X * theta;
+diff_hypo_y = hypo_vector - y;
+J = (1/(2*m)) * sum((diff_hypo_y) .^ 2);
 
+% Regularized
 theta_exclude_zero = theta;
 theta_exclude_zero(1) = 0;
 
 J = J + (lambda/(2*m)) * sum(theta_exclude_zero .^ 2);
 
 
-
-
-
-
-
+% Calculate grad
+grad = (1/m) * transpose(sum(diff_hypo_y .* X)) + (lambda/m) * theta_exclude_zero;
 
 
 % =========================================================================
