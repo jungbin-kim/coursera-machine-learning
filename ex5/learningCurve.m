@@ -53,7 +53,19 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+for i = 1:m
+	% training set
+	x_to_index = X(1:i, :);
+	y_to_index = y(1:i);
+	theta = trainLinearReg(x_to_index, y_to_index, lambda);
+	J = linearRegCostFunction(x_to_index, y_to_index, theta, 0);
+	error_train(i) = J;
 
+	% For the cross-validation error, Should use the entire cross validation set
+	J = linearRegCostFunction(Xval, yval, theta, 0);
+	error_val(i) = J;
+
+end
 
 
 
