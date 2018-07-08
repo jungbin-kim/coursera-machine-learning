@@ -22,9 +22,14 @@ idx = zeros(size(X,1), 1);
 %
 
 
-
-
-
+for i=1:size(X,1);
+	distances = zeros(K, 1);
+	for centroid_index = 1:K;
+		distances(centroid_index) = norm( X(i,:) - centroids(centroid_index,:) , 2 );
+	end
+	[min_val, min_index] = min(distances);
+	idx(i) = min_index;
+end
 
 
 % =============================================================
