@@ -18,8 +18,11 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-
-
+% take the first k directions
+Ureduce = U(:,1:K);  
+% compute the projected data points
+Z = X * Ureduce;
+% 참조: http://fabj.tistory.com/8
 
 % =============================================================
 
