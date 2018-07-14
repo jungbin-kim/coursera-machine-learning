@@ -23,16 +23,18 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
+    % yval: 실제 true
 
+    % true 로 판단된 y
+    true_predicted = pval < epsilon;
 
+    true_positive = yval & true_predicted;
+    true_positive_sum = sum(true_positive);
 
+    precision = true_positive_sum / sum(true_predicted);
+    recall = true_positive_sum / sum(yval);
 
-
-
-
-
-
-
+    F1 = 2 * precision * recall / (precision + recall);
 
 
     % =============================================================
