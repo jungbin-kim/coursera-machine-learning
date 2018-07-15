@@ -47,7 +47,8 @@ J = J + (lambda / 2) * (sum(sum(Theta .^ 2)) + sum(sum(X .^ 2)));
 
 X_grad = diff_y .* R * Theta;
 Theta_grad = (diff_y .* R)'  * X;
-
+X_grad = X_grad + lambda * X;
+Theta_grad = Theta_grad + lambda * Theta;
 
 % =============================================================
 
